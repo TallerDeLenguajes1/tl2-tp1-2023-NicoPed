@@ -1,4 +1,4 @@
-namespace CadeteriaHrms
+namespace CadeteriaHrms;
 
 public class Cliente{
     private string nombre;
