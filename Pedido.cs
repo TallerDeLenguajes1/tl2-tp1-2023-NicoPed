@@ -11,16 +11,25 @@ public class Pedido
     private string observacion;
     private Cliente cliente;
     private Estado estado;
-    private float precio;
-    public global::System.Int32 NroPedido { get => nroPedido; set => nroPedido = value; }
-    public global::System.String Observacion { get => observacion; set => observacion = value; }
     internal Estado Estado { get => estado; set => estado = value; }
+    public string Observacion { get => observacion; set => observacion = value; }
+    public int NroPedido { get => nroPedido; set => nroPedido = value; }
 
     public Pedido (int numeroPedido, string observacionPedido, string nombreCliente, string direccionCliente, string telefonoCliente, string datoDeReferenciaDireccion) {
         estado = Estado.Pendiente;
-        nroPedido = numeroPedido;
-        observacion = observacionPedido;
+        NroPedido = numeroPedido;
+        Observacion = observacionPedido;
         cliente = new Cliente(nombreCliente,direccionCliente,telefonoCliente,datoDeReferenciaDireccion);
+    }
+    public string verDireccionCliente(){
+        string? direccion;
+        direccion = cliente.Direccion + "-" + cliente.DatosReferencia;
+        return direccion;
+    }
+    public string verDatosCliente(){
+        string? datos;
+        datos = cliente.Nombre + "-" + cliente.Telefono;
+        return datos;
     }
 }
 
