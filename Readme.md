@@ -9,7 +9,7 @@ Pedidos-Cadete
 *Cadeteria*
 AgregarPedido, AgregarCadete, ReasignarPedido, EliminarPedido, CambiarEstado, DevolverCadete, buscarCadeteEncargado, BuscarPedidoDeUnCadete
 *Cadete*
-AgregarPedido, CantidadDePedidos, cambiarEstado
+AgregarPedido, CantidadDePedidos, cambiarEstado,BuscarPedido
 
 # Teniendo en cuenta los principios de abstracción y ocultamiento, que atributos, propiedades y métodos deberían ser públicos y cuáles privados.
 *Cadeteria*

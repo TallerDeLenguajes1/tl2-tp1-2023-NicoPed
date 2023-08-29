@@ -5,7 +5,53 @@ public class Cadeteria{
     private string telefonoCadeteria;
     private List<Cadete> listadoCadeteria;
 
-//AgregarPedido, AgregarCadete, ReasignarPedido, EliminarPedido, CambiarEstado, DevolverCadete
+    public string NombreCadeteria { get => nombreCadeteria;  }
+    public string TelefonoCadeteria { get => telefonoCadeteria;  }
+
+    //AgregarPedido, AgregarCadete, ReasignarPedido, EliminarPedido, CambiarEstado, DevolverCadete
+    public void CambiarPedidoDeEstado(int numeroPedido){
+        Cadete cadeteAsignado = BuscarCadeteEncargadoDelPedido(numeroPedido);
+        if (cadeteAsignado != null)
+        {
+            cadeteAsignado.CambiarPedidoDeEstado(numeroPedido);
+        }else
+        {
+            Mensajes.PedidoNoEncontrado();
+        }
+    }
+    public void EliminarPedido(int numeroPedido){
+        Cadete cadeteAsignado = BuscarCadeteEncargadoDelPedido(numeroPedido);
+        if (cadeteAsignado == null)
+        {
+            Mensajes.PedidoNoEncontrado();
+        }else
+        {
+            Pedido pedidoAEliminar = BuscarPedidoDeUnCadete(numeroPedido,cadeteAsignado);
+            cadeteAsignado.eliminarPedido(pedidoAEliminar);
+            pedidoAEliminar.CancelarPedido();
+        } 
+    }
+    public void ReasignarPedido(int numeroPedido, int idDelNuevoCadete){
+        Cadete cadeteViejo = BuscarCadeteEncargadoDelPedido(numeroPedido);
+        if (cadeteViejo == null)
+        {
+            Mensajes.PedidoNoEncontrado();
+        }else
+        {
+            Pedido pedidoAReasignar = BuscarPedidoDeUnCadete(numeroPedido,cadeteViejo);
+            Cadete cadeteAsignado;
+            do
+            {
+                cadeteAsignado = DevolverCadete(idDelNuevoCadete);
+                if (cadeteAsignado == null)
+                {
+                    idDelNuevoCadete = PedirIdCadete();
+                }
+            } while (cadeteAsignado == null);
+            cadeteAsignado.AgregarPedido(pedidoAReasignar);
+            cadeteViejo.eliminarPedido(pedidoAReasignar);
+        }
+    }
     public Pedido BuscarPedidoDeUnCadete(int numeroPedido, Cadete cadete){
         Pedido pedidoBuscado;
         pedidoBuscado = cadete.ListadoPedido.FirstOrDefault(pedido => pedido.NroPedido == numeroPedido);
@@ -25,12 +71,12 @@ public class Cadeteria{
         }
         return cadeteBuscado;
     }
-    public void CambiarPedidoDeEstado(int numeroPedido){
-
-    }
     public void AgregarCadete(int IdCadete, string NombreCadete, string DireccionCadete, string TelefonoCadete){
         Cadete nuevoCadete = new Cadete(IdCadete,NombreCadete,DireccionCadete,TelefonoCadete);
         listadoCadeteria.Add(nuevoCadete);
+    }
+    public void CargarCadetes(List <Cadete> listadoCadetes){
+        listadoCadeteria.AddRange(listadoCadetes);
     }
     public Cadeteria(string Nombre, string Telefono){
         nombreCadeteria = Nombre;

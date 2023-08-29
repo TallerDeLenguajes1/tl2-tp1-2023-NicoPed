@@ -11,14 +11,14 @@ public class Pedido
     private string observacion;
     private Cliente cliente;
     private Estado estado;
-    internal Estado Estado { get => estado; set => estado = value; }
-    public string Observacion { get => observacion; set => observacion = value; }
-    public int NroPedido { get => nroPedido; set => nroPedido = value; }
+    internal Estado Estado { get => estado;  }
+    public string Observacion { get => observacion;  }
+    public int NroPedido { get => nroPedido;  }
 
     public Pedido (int numeroPedido, string observacionPedido, string nombreCliente, string direccionCliente, string telefonoCliente, string datoDeReferenciaDireccion) {
         estado = Estado.Pendiente;
-        NroPedido = numeroPedido;
-        Observacion = observacionPedido;
+        nroPedido = numeroPedido;
+        observacion = observacionPedido;
         cliente = new Cliente(nombreCliente,direccionCliente,telefonoCliente,datoDeReferenciaDireccion);
     }
     public string verDireccionCliente(){
@@ -30,6 +30,17 @@ public class Pedido
         string? datos;
         datos = cliente.Nombre + "-" + cliente.Telefono;
         return datos;
+    }
+     public bool CambiarPedidoDeEstado(){
+        if (estado != Estado.Cancelado)
+        {
+            estado = Estado.Entregado;
+            return true;
+        }
+        return false;
+    }
+    public void CancelarPedido(){
+        estado = Estado.Cancelado;
     }
 }
 
