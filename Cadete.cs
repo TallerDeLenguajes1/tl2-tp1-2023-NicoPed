@@ -21,8 +21,8 @@ public class Cadete{
         NombreCadete = Nombre;
         DireccionCadete = Direccion;
         TelefonoCadete = Telefono;
-        ListadoPedido.Clear();
         pedidosRealizados = 0;
+        listadoPedido = new List<Pedido>();
     }
 
     public float JornalACobrar(){

@@ -1,7 +1,7 @@
 namespace CadeteriaHrms;
 
 public  class ConversorObjetos{
-        public static List<Cadete> ConversorDeCadete(List<string[]> archivoConCadetes)
+        public  List<Cadete> ConversorDeCadete(List<string[]> archivoConCadetes)
         {
 
             List<Cadete> ListadoCadetes = new List<Cadete>();
@@ -12,12 +12,15 @@ public  class ConversorObjetos{
             }
             return ListadoCadetes;
         }
-     public static Cadeteria ConversorDeCadeteria(List<string[]> archivoConCadeteria)
+     
+        public Cadeteria ConversorDeCadeteria(List<string[]> archivoConCadeteria)
         {
             Cadeteria nuevaCadeteria = new Cadeteria("Error","Error");
             foreach (string[] cadeteri in archivoConCadeteria)
             {
-                nuevaCadeteria = new Cadeteria (cadeteri[0], cadeteri[1]);
+                nuevaCadeteria.NombreCadeteria = cadeteri[0];
+                nuevaCadeteria.TelefonoCadeteria = cadeteri[1];
+                break;
             }
               return nuevaCadeteria;
         }

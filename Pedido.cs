@@ -15,11 +15,11 @@ public class Pedido
     public string Observacion { get => observacion;  }
     public int NroPedido { get => nroPedido;  }
 
-    public Pedido (int numeroPedido, string observacionPedido, string nombreCliente, string direccionCliente, string telefonoCliente, string datoDeReferenciaDireccion) {
+    public Pedido (int numeroPedido, string observacionPedido, string nombreCliente, string direccionCliente, string telefonoCliente, string datoDeReferencia) {
         estado = Estado.Pendiente;
         nroPedido = numeroPedido;
         observacion = observacionPedido;
-        cliente = new Cliente(nombreCliente,direccionCliente,telefonoCliente,datoDeReferenciaDireccion);
+        cliente = new Cliente(nombreCliente,direccionCliente,telefonoCliente,datoDeReferencia);
     }
     public string verDireccionCliente(){
         string? direccion;

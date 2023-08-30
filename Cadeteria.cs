@@ -3,10 +3,11 @@ namespace CadeteriaHrms;
 public class Cadeteria{
     private string nombreCadeteria;
     private string telefonoCadeteria;
-    private List<Cadete> listadoCadeteria;
+    private List<Cadete> listadoCadetes;
 
-    public string NombreCadeteria { get => nombreCadeteria;  }
-    public string TelefonoCadeteria { get => telefonoCadeteria;  }
+    public List<Cadete> ListadoCadetes { get => listadoCadetes;  }
+    public string NombreCadeteria { get => nombreCadeteria; set => nombreCadeteria = value; }
+    public string TelefonoCadeteria { get => telefonoCadeteria; set => telefonoCadeteria = value; }
 
     //AgregarPedido, AgregarCadete, ReasignarPedido, EliminarPedido, CambiarEstado, DevolverCadete
     public void CambiarPedidoDeEstado(int numeroPedido){
@@ -59,7 +60,7 @@ public class Cadeteria{
     }
     public Cadete BuscarCadeteEncargadoDelPedido(int numeroPedido){
         Cadete cadeteBuscado = null;
-        foreach (var cadete in listadoCadeteria)
+        foreach (var cadete in ListadoCadetes)
         {
             //buscar pedido
             Pedido pedidoBuscado = BuscarPedidoDeUnCadete(numeroPedido,cadete);
@@ -73,21 +74,21 @@ public class Cadeteria{
     }
     public void AgregarCadete(int IdCadete, string NombreCadete, string DireccionCadete, string TelefonoCadete){
         Cadete nuevoCadete = new Cadete(IdCadete,NombreCadete,DireccionCadete,TelefonoCadete);
-        listadoCadeteria.Add(nuevoCadete);
+        ListadoCadetes.Add(nuevoCadete);
     }
     public void CargarCadetes(List <Cadete> listadoCadetes){
-        listadoCadeteria.AddRange(listadoCadetes);
+        ListadoCadetes.AddRange(listadoCadetes);
     }
     public Cadeteria(string Nombre, string Telefono){
-        nombreCadeteria = Nombre;
-        telefonoCadeteria = Telefono;
-        listadoCadeteria.Clear();
+        NombreCadeteria = Nombre;
+        TelefonoCadeteria = Telefono;
+        listadoCadetes = new List<Cadete>();
     }
     private Cadete DevolverCadete(int idCadete){
-        return listadoCadeteria.FirstOrDefault(cadete => cadete.IdCadete == idCadete);
+        return ListadoCadetes.FirstOrDefault(cadete => cadete.IdCadete == idCadete);
     }
-    public void AgregarPedido(int numeroPedido, string observacionPedido, string nombreCliente, string direccionCliente, string telefonoCliente, string datoDeReferenciaDireccion, int idCadete){
-        Pedido nuevoPedido = new Pedido(numeroPedido,observacionPedido,nombreCliente,direccionCliente,telefonoCliente,datoDeReferenciaDireccion);
+    public void AgregarPedido(int numeroPedido, string observacionPedido, string nombreCliente, string direccionCliente, string telefonoCliente, string datoDeReferencia, int idCadete){
+        Pedido nuevoPedido = new Pedido(numeroPedido,observacionPedido,nombreCliente,direccionCliente,telefonoCliente,datoDeReferencia);
         Cadete cadeteAsignado;
         do
         {

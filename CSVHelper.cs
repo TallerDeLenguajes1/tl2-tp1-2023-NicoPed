@@ -1,17 +1,32 @@
 namespace CadeteriaHrms;
 
 public class CSVHelper{
-
-    public string leerArchivo(string nombreDelArchivo){
-        var stringArchivo = "";
-        using (StreamReader lector = new StreamReader(nombreDelArchivo))
+    public List<string[]> LeerArchivo(string nombreDelArchivo, char caracter)
         {
-            stringArchivo = lector.ReadToEnd();
-            lector.Close();
-            lector.Dispose();
+            FileStream MiArchivo = new FileStream(nombreDelArchivo, FileMode.Open);
+            StreamReader StrReader = new StreamReader(MiArchivo);
+
+            string Linea = "";
+            List<string[]> LecturaDelArchivo = new List<string[]>();
+
+            while ((Linea = StrReader.ReadLine()) != null)
+            {
+                string[] Fila = Linea.Split(caracter);
+                LecturaDelArchivo.Add(Fila);
+            }
+
+            return LecturaDelArchivo;
         }
-        return stringArchivo;
-    }
+    // public string[] leerArchivo(string nombreDelArchivo){
+    //     string[] stringArchivo;
+    //     using (StreamReader lector = new StreamReader(nombreDelArchivo))
+    //     {
+    //         stringArchivo = lector.ReadToEnd();
+    //         lector.Close();
+    //         lector.Dispose();
+    //     }
+    //     return stringArchivo;
+    // }
     public void guardarCadetes(string nombreDelArchivo, List<Cadete> listaCadetes){
         if (!File.Exists(nombreDelArchivo))
         {
