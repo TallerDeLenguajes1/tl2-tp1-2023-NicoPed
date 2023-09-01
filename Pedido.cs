@@ -11,9 +11,11 @@ public class Pedido
     private string observacion;
     private Cliente cliente;
     private Estado estado;
+    private int idCadete;
     internal Estado Estado { get => estado;  }
     public string Observacion { get => observacion;  }
     public int NroPedido { get => nroPedido;  }
+    public int IdCadete { get => idCadete; }
 
     public Pedido (int numeroPedido, string observacionPedido, string nombreCliente, string direccionCliente, string telefonoCliente, string datoDeReferencia) {
         estado = Estado.Pendiente;

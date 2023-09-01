@@ -12,7 +12,6 @@ public class Cadete{
     public string NombreCadete { get => nombreCadete; set => nombreCadete = value; }
     public string DireccionCadete { get => direccionCadete; set => direccionCadete = value; }
     public string TelefonoCadete { get => telefonoCadete; set => telefonoCadete = value; }
-    public List<Pedido> ListadoPedido { get => listadoPedido;  }
     public int PedidosRealizados { get => pedidosRealizados; }
 
     
@@ -22,13 +21,9 @@ public class Cadete{
         DireccionCadete = Direccion;
         TelefonoCadete = Telefono;
         pedidosRealizados = 0;
-        listadoPedido = new List<Pedido>();
     }
 
-    public float JornalACobrar(){
-        float aCobrar = 500 * PedidosRealizados;
-        return aCobrar;
-    }
+
     public void AgregarPedido(Pedido nuevoPedido){
         listadoPedido.Add(nuevoPedido);
     }
@@ -38,16 +33,16 @@ public class Cadete{
     public void eliminarPedido(Pedido PedidoAEliminar){
         listadoPedido.Remove(PedidoAEliminar);
     }
-    public void CambiarPedidoDeEstado(int numeroPedido){
-        Pedido pedidoACambiar = BuscarPedido(numeroPedido);
-        if (pedidoACambiar.CambiarPedidoDeEstado())
-        {
-            pedidosRealizados ++;
-        }
-    }
-    public Pedido BuscarPedido(int numeroPedido){
-        Pedido pedidoBuscado;
-        pedidoBuscado = ListadoPedido.FirstOrDefault(pedido => pedido.NroPedido == numeroPedido);
-        return pedidoBuscado;
-    }
+    // public void CambiarPedidoDeEstado(int numeroPedido){
+    //     Pedido pedidoACambiar = BuscarPedido(numeroPedido);
+    //     if (pedidoACambiar.CambiarPedidoDeEstado())
+    //     {
+    //         pedidosRealizados ++;
+    //     }
+    // }
+    // public Pedido BuscarPedido(int numeroPedido){
+    //     Pedido pedidoBuscado;
+    //     pedidoBuscado = ListadoPedido.FirstOrDefault(pedido => pedido.NroPedido == numeroPedido);
+    //     return pedidoBuscado;
+    // }
 }
