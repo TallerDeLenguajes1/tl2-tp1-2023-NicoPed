@@ -13,13 +13,11 @@ public static class Mensajes{
         Console.WriteLine("╔══════════════════════╗");
         Console.WriteLine("║ »Pedido inexistente« ║");
         Console.WriteLine("╚══════════════════════╝");
-        Console.Write("Ingrese » ");
 
     }    public static void CadeteNoEncontrado(){
         Console.WriteLine("╔══════════════════════╗");
         Console.WriteLine("║ »cadete inexistente« ║");
         Console.WriteLine("╚══════════════════════╝");
-        Console.Write("Ingrese » ");
 
     }
 }

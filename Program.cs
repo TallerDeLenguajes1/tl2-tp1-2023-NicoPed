@@ -5,17 +5,17 @@ internal class Program
     {
     int opcion;
         var conversor = new ConversorObjetos();
-        var AyudanteCSV = new CSVHelper();
+        var AyudanteCSV = new AccesoCSV();
         Cadeteria cadeteriaHermanos;
         List<Cadete> listadoCadetes;
-        List<string []> stringDeCadetes, stringCadeteria;
+        // List<string []> stringDeCadetes, stringCadeteria;
         string? nombreCliente,telefonoCliente,direccionCliente,datoDeReferencia,observacionExtra, stringIdCadete, stringIdPedido;
         int numeroPedido = 0, idCadete, idpedido = 9999;
-
-        stringCadeteria = AyudanteCSV.LeerArchivo("CadeteriaHrms.csv",';');
-        cadeteriaHermanos = conversor.ConversorDeCadeteria(stringCadeteria);
-        stringDeCadetes = AyudanteCSV.LeerArchivo("CadetesInscriptos.csv",';');
-        listadoCadetes = conversor.ConversorDeCadete(stringDeCadetes);
+        cadeteriaHermanos = AyudanteCSV.leerArchivoCadeteria("CadeteriaHrms.csv"); 
+        // stringCadeteria = AyudanteCSV.LeerArchivo();
+        // cadeteriaHermanos = conversor.ConversorDeCadeteria(stringCadeteria);
+        listadoCadetes = AyudanteCSV.leerArchivoCadetes("CadetesInscriptos.csv");
+        // listadoCadetes = conversor.ConversorDeCadete(stringDeCadetes);
         cadeteriaHermanos.CargarCadetes(listadoCadetes);
 
         do
@@ -61,7 +61,7 @@ internal class Program
                     break;
                 case 5:
                 case 3:
-                    Console.WriteLine("Ingrese el numero de pedido que quiere Reasignar");
+                    Console.WriteLine("Ingrese el numero de pedido que quiere asignar");
                     Console.Write("Ingrese: ");
                     do
                     {
@@ -75,7 +75,6 @@ internal class Program
                         stringIdCadete = Console.ReadLine();
                     } while (!int.TryParse(stringIdCadete, out idCadete));
                     cadeteriaHermanos.asignarCadeteAPedido(numeroPedido,idCadete);
-                    Console.WriteLine("Saliendo del programa...");
                     break;
                 case 4:
                     Console.WriteLine("Ingrese que pedido quiere dar como CANCELADO");

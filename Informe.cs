@@ -13,7 +13,7 @@ namespace CadeteriaHrms;
                 int idCadete = cadete.IdCadete;
                 float aCobrar = cadeteri.JornalACobrar(idCadete);
                 int pedidosRealizadosCadete = Convert.ToInt32(aCobrar / constantes.CobroPorEnvio);
-                Console.WriteLine("Nombre del Cadete"+cadete.NombreCadete);
+                Console.WriteLine("Nombre del Cadete: "+cadete.NombreCadete);
                 Console.WriteLine("Id del Cadete: "+cadete.IdCadete);
                 Console.WriteLine("Pedidos realizados: "+pedidosRealizadosCadete);
                 Console.WriteLine("Envios promedio del cadete del día de hoy : "+ pedidosRealizadosCadete * 100 / cantidadDePedidosDeHoy);
