@@ -23,8 +23,9 @@ internal class Program
             Console.WriteLine("\nBienvenido al Sistema de Gestión de Pedidos");
             Console.WriteLine("1. Dar de alta pedido");
             Console.WriteLine("2. Cambiar estado de pedido a ENTREGADO");
-            Console.WriteLine("3. Reasignar pedido a otro cadete");
+            Console.WriteLine("3. Asignar pedido a un cadete");
             Console.WriteLine("4. Cambiar estado de pedido a CANCELADO");
+            Console.WriteLine("5. Reasignar pedido a otro cadete");
             Console.WriteLine("0. Salir");
             Console.Write("Seleccione una opción: ");
             if (!int.TryParse(Console.ReadLine(), out opcion))
@@ -47,14 +48,8 @@ internal class Program
                     datoDeReferencia = Console.ReadLine();
                     Console.Write("Observacion Extra:");
                     observacionExtra = Console.ReadLine();
-                    Console.WriteLine("Ingrese el id del Cadete: ");
-                    Console.Write("Ingrese: ");
-                    do
-                    {
-                        stringIdCadete = Console.ReadLine();
-                    } while (!int.TryParse(stringIdCadete, out idCadete));
                     numeroPedido ++;
-                    cadeteriaHermanos.AgregarPedido(numeroPedido,observacionExtra,nombreCliente,direccionCliente,telefonoCliente,datoDeReferencia,idCadete);
+                    cadeteriaHermanos.AgregarPedido(numeroPedido,observacionExtra,nombreCliente,direccionCliente,telefonoCliente,datoDeReferencia);
                     break;
                 case 2:
                     Console.WriteLine("Ingrese que pedido quiere dar como Entregado");
@@ -64,6 +59,7 @@ internal class Program
                     } while (!int.TryParse(stringIdPedido, out idpedido));
                     cadeteriaHermanos.CambiarPedidoDeEstado(idpedido);
                     break;
+                case 5:
                 case 3:
                     Console.WriteLine("Ingrese el numero de pedido que quiere Reasignar");
                     Console.Write("Ingrese: ");
@@ -71,13 +67,15 @@ internal class Program
                     {
                         stringIdPedido = Console.ReadLine();
                     } while (!int.TryParse(stringIdPedido, out idpedido));
+
                     Console.WriteLine("Ingrese el id del Cadete: ");
                     Console.Write("Ingrese: ");
                     do
                     {
                         stringIdCadete = Console.ReadLine();
                     } while (!int.TryParse(stringIdCadete, out idCadete));
-                    cadeteriaHermanos.ReasignarPedido(idpedido,idCadete);
+                    cadeteriaHermanos.asignarCadeteAPedido(numeroPedido,idCadete);
+                    Console.WriteLine("Saliendo del programa...");
                     break;
                 case 4:
                     Console.WriteLine("Ingrese que pedido quiere dar como CANCELADO");
@@ -95,7 +93,7 @@ internal class Program
                     break;
             }
         } while (opcion != 0);
-    Informe nuevoInforme= new Informe(cadeteriaHermanos);
-    nuevoInforme.MostrarInforme();
+    Informe nuevoInforme= new Informe();
+    nuevoInforme.mostrarInforme(cadeteriaHermanos);
     }
 }

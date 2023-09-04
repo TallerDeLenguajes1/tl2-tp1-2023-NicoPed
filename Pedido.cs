@@ -7,6 +7,7 @@ enum Estado
 }
 public class Pedido
 {
+    private int cadeteDefault = 999999;
     private int nroPedido;
     private string observacion;
     private Cliente cliente;
@@ -15,13 +16,14 @@ public class Pedido
     internal Estado Estado { get => estado;  }
     public string Observacion { get => observacion;  }
     public int NroPedido { get => nroPedido;  }
-    public int IdCadete { get => idCadete; }
-
+    public int IdCadete { get => idCadete; set => idCadete = value ;}
+    public int CadeteDefault {get => cadeteDefault;}
     public Pedido (int numeroPedido, string observacionPedido, string nombreCliente, string direccionCliente, string telefonoCliente, string datoDeReferencia) {
         estado = Estado.Pendiente;
         nroPedido = numeroPedido;
         observacion = observacionPedido;
         cliente = new Cliente(nombreCliente,direccionCliente,telefonoCliente,datoDeReferencia);
+        idCadete = cadeteDefault;
     }
     public string verDireccionCliente(){
         string? direccion;
@@ -41,8 +43,13 @@ public class Pedido
         }
         return false;
     }
-    public void CancelarPedido(){
-        estado = Estado.Cancelado;
+    public bool CancelarPedido(){
+        if (estado != Estado.Entregado)
+        {
+            estado = Estado.Cancelado;
+            return true;
+        }
+        return false;
     }
 }
 
