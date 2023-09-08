@@ -6,38 +6,43 @@ public class Cadeteria{
     private List<Cadete> listadoCadetes;
     private List <Pedido> listadoPedido;
     public List<Cadete> ListadoCadetes { get => listadoCadetes;  }
-    public string NombreCadeteria { get => nombreCadeteria; set => nombreCadeteria = value; }
-    public string TelefonoCadeteria { get => telefonoCadeteria; set => telefonoCadeteria = value; }
+    public string NombreCadeteria { get => nombreCadeteria;  }
+    public string TelefonoCadeteria { get => telefonoCadeteria; }
     public List<Pedido> ListadoPedido { get => listadoPedido;  }
 
     
     public Cadeteria(string Nombre, string Telefono){
-        NombreCadeteria = Nombre;
-        TelefonoCadeteria = Telefono;
+        nombreCadeteria = Nombre;
+        telefonoCadeteria = Telefono;
         listadoCadetes = new List<Cadete>();
         listadoPedido = new List<Pedido>();
     }
-    public void EliminarPedido(int numeroPedido){
+    public bool EliminarPedido(int numeroPedido){
         var pedidoACambiar = BuscarPedido(numeroPedido);
         if (pedidoACambiar != null)
         {
             if (pedidoACambiar.CancelarPedido()){
                 pedidoACambiar.IdCadete = pedidoACambiar.CadeteDefault;
+                return true;
+            }else
+            {
+                return false;
             }
             
         }else
         {
-            Mensajes.PedidoNoEncontrado();
+            return false;
         }
     }
-    public void CambiarPedidoDeEstado(int numeroPedido){
+    public bool CambiarPedidoDeEstado(int numeroPedido){
         var pedidoACambiar = BuscarPedido(numeroPedido);
         if (pedidoACambiar != null)
         {
-            pedidoACambiar.CambiarPedidoDeEstado();
+            return pedidoACambiar.CambiarPedidoDeEstado();
+            
         }else
         {
-            Mensajes.PedidoNoEncontrado();
+            return false;
         }
     }
     public Cadete buscarCadete(int idCadete){
@@ -50,19 +55,21 @@ public class Cadeteria{
         pedidoBuscado = ListadoPedido.FirstOrDefault(pedido => pedido.NroPedido == numeroPedido);
         return pedidoBuscado;
     }
-    public void asignarCadeteAPedido(int numeroPedido, int idDelCadete){
+    public bool asignarCadeteAPedido(int numeroPedido, int idDelCadete){
         var pedioAsignar = BuscarPedido(numeroPedido);
         if (pedioAsignar != null)
         {
             if (buscarCadete(idDelCadete) != null)
             {
                 pedioAsignar.IdCadete = idDelCadete;
+                return true;
+
             }else
             {
-                Mensajes.CadeteNoEncontrado();
+                return false;
             }
         }else{
-            Mensajes.PedidoNoEncontrado();
+            return false;
         }
     }
 
@@ -82,61 +89,18 @@ public class Cadeteria{
     public void CargarCadetes(List <Cadete> listadoCadetes){
         ListadoCadetes.AddRange(listadoCadetes);
     }
-    public void AgregarPedido(int numeroPedido, string observacionPedido, string nombreCliente, string direccionCliente, string telefonoCliente, string datoDeReferencia){
+    public bool AgregarPedido(int numeroPedido, string observacionPedido, string nombreCliente, string direccionCliente, string telefonoCliente, string datoDeReferencia){
         Pedido nuevoPedido = new Pedido(numeroPedido,observacionPedido,nombreCliente,direccionCliente,telefonoCliente,datoDeReferencia);
-        listadoPedido.Add(nuevoPedido);
+        if (nuevoPedido != null)
+        {
+            listadoPedido.Add(nuevoPedido);
+            return true;
+        }
+            return false;
+
+    }
+    public string mostrarDatosCadeteria(){
+        string datosCadeteria = nombreCadeteria + " - " + telefonoCadeteria;
+        return datosCadeteria;
     }
 }
-    // private int PedirIdCadete(){
-    //     int id = 9999;
-    //     string? stringId;
-    //     Mensajes.malIngresoIdCadete();
-    //     stringId = Console.ReadLine();
-    //     if (! int.TryParse(stringId, out id))
-    //     {
-    //         id = 9999;
-    //     } 
-    //     return id;
-    // }
-    // public void CambiarPedidoDeEstado(int numeroPedido){
-    //     Cadete cadeteAsignado = BuscarCadeteEncargadoDelPedido(numeroPedido);
-    //     if (cadeteAsignado != null)
-    //     {
-    //         cadeteAsignado.CambiarPedidoDeEstado(numeroPedido);
-    //     }else
-    //     {
-    //         Mensajes.PedidoNoEncontrado();
-    //     }
-    // }
-    // public void EliminarPedido(int numeroPedido){
-    //     Cadete cadeteAsignado = BuscarCadeteEncargadoDelPedido(numeroPedido);
-    //     if (cadeteAsignado == null)
-    //     {
-    //         Mensajes.PedidoNoEncontrado();
-    //     }else
-    //     {
-    //         Pedido pedidoAEliminar = BuscarPedidoDeUnCadete(numeroPedido,cadeteAsignado);
-    //         cadeteAsignado.eliminarPedido(pedidoAEliminar);
-    //         pedidoAEliminar.CancelarPedido();
-    //     } 
-    // }
-
-    // public Pedido BuscarPedidoDeUnCadete(int numeroPedido, Cadete cadete){
-    //     Pedido pedidoBuscado;
-    //     pedidoBuscado = cadete.ListadoPedido.FirstOrDefault(pedido => pedido.NroPedido == numeroPedido);
-    //     return pedidoBuscado;
-    // }
-    // public Cadete BuscarCadeteEncargadoDelPedido(int numeroPedido){
-    //     Cadete cadeteBuscado = null;
-    //     foreach (var cadete in ListadoCadetes)
-    //     {
-    //         //buscar pedido
-    //         Pedido pedidoBuscado = BuscarPedidoDeUnCadete(numeroPedido,cadete);
-    //         if (pedidoBuscado != null)
-    //         {
-    //             cadeteBuscado = cadete;
-    //             break;
-    //         }
-    //     }
-    //     return cadeteBuscado;
-    // }
