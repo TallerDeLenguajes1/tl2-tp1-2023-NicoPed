@@ -1,3 +1,5 @@
+using System.Text;
+
 namespace CadeteriaHrms;
 
 public class Cadeteria{
@@ -103,4 +105,17 @@ public class Cadeteria{
         string datosCadeteria = nombreCadeteria + " - " + telefonoCadeteria;
         return datosCadeteria;
     }
+    public string mostrarPedidos(){
+        StringBuilder listadoDePedidos = new StringBuilder();
+        foreach (var pedido in listadoPedido)
+        {
+            listadoDePedidos.AppendLine(pedido.NroPedido.ToString());
+            listadoDePedidos.AppendLine(pedido.Estado.ToString());
+            listadoDePedidos.AppendLine(pedido.Observacion);
+            listadoDePedidos.AppendLine(pedido.verDatosCliente());
+            listadoDePedidos.AppendLine(pedido.verDireccionCliente());
+        }
+        return listadoDePedidos.ToString();
+    }
+    
 }
