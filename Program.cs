@@ -8,14 +8,11 @@ internal class Program
         var AyudanteCSV = new AccesoCSV();
         Cadeteria cadeteriaHermanos;
         List<Cadete> listadoCadetes;
-        // List<string []> stringDeCadetes, stringCadeteria;
         string? nombreCliente,telefonoCliente,direccionCliente,datoDeReferencia,observacionExtra, stringIdCadete, stringIdPedido;
         int numeroPedido = 0, idCadete, idpedido = 9999;
         cadeteriaHermanos = AyudanteCSV.leerArchivoCadeteria("CadeteriaHrms.csv"); 
-        // stringCadeteria = AyudanteCSV.LeerArchivo();
-        // cadeteriaHermanos = conversor.ConversorDeCadeteria(stringCadeteria);
+
         listadoCadetes = AyudanteCSV.leerArchivoCadetes("CadetesInscriptos.csv");
-        // listadoCadetes = conversor.ConversorDeCadete(stringDeCadetes);
         cadeteriaHermanos.CargarCadetes(listadoCadetes);
 
         do
