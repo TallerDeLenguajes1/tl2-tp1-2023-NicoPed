@@ -33,18 +33,29 @@ public class AccesoCSV : AccesoADatos{
             }
             return ListadoCadetes;
     }
-    public override Cadeteria leerArchivoCadeteria(string nombreArchivo)
-    {
-        var archivoConCadeteria = LeerArchivo(nombreArchivo, ';');
-        Cadeteria nuevaCadeteria = new Cadeteria("Error","Error");
-            foreach (string[] cadeteri in archivoConCadeteria)
-            {
-                nuevaCadeteria.NombreCadeteria = cadeteri[0];
-                nuevaCadeteria.TelefonoCadeteria = cadeteri[1];
-                break;
-            }
-              return nuevaCadeteria;
+    public override Cadeteria leerArchivoCadeteria(string rutaDatosCadeteria){
+        string[] datosCadeteria;
+
+        using (StreamReader s = new StreamReader(rutaDatosCadeteria))
+        {
+            datosCadeteria = s.ReadLine().Split(';');
+        }
+
+        Cadeteria cadeteria = new Cadeteria(datosCadeteria[0], datosCadeteria[1]);
+        return cadeteria;
     }
+    // public override Cadeteria leerArchivoCadeteria(string nombreArchivo)
+    // {
+    //     var archivoConCadeteria = LeerArchivo(nombreArchivo, ';');
+    //     Cadeteria nuevaCadeteria = new Cadeteria("Error","Error");
+    //         foreach (string[] cadeteri in archivoConCadeteria)
+    //         {
+    //             nuevaCadeteria.NombreCadeteria = cadeteri[0];
+    //             nuevaCadeteria.TelefonoCadeteria = cadeteri[1];
+    //             break;
+    //         }
+    //           return nuevaCadeteria;
+    // }
 }
 public class AccesoJSON : AccesoADatos{
     public override Cadeteria leerArchivoCadeteria(string nombreArchivo)

@@ -18,7 +18,12 @@ public class Cadete{
         DireccionCadete = Direccion;
         TelefonoCadete = Telefono;
     }
-
+    
+    public string MostrarInfo(){
+        string datos;
+        datos = ($"Id: {IdCadete}\n Nombre: {NombreCadete}\nDireccion: {DireccionCadete}\nTelefono: {TelefonoCadete}");
+        return datos;
+    }
 
     // public void AgregarPedido(Pedido nuevoPedido){
     //     listadoPedido.Add(nuevoPedido);

@@ -60,12 +60,18 @@ public class Cadeteria{
     public bool asignarCadeteAPedido(int numeroPedido, int idDelCadete){
         var pedioAsignar = BuscarPedido(numeroPedido);
         if (pedioAsignar != null)
-        {
-            if (buscarCadete(idDelCadete) != null)
-            {
-                pedioAsignar.IdCadete = idDelCadete;
-                return true;
+        { 
+            if (pedioAsignar.Estado != Estado.Entregado)
+            {    
+                if (buscarCadete(idDelCadete) != null)
+                {
+                    pedioAsignar.IdCadete = idDelCadete;
+                    return true;
 
+                }else
+                {
+                    return false;
+                }
             }else
             {
                 return false;
@@ -117,5 +123,12 @@ public class Cadeteria{
         }
         return listadoDePedidos.ToString();
     }
-    
+    public string mostrarCadeteria(){
+        StringBuilder listadoDeCadetes = new StringBuilder();
+        foreach (var cade in listadoCadetes)
+        {
+            listadoDeCadetes.AppendLine(cade.MostrarInfo());
+        }
+        return listadoDeCadetes.ToString();
+    }
 }
