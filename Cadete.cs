@@ -21,7 +21,7 @@ public class Cadete{
     
     public string MostrarInfo(){
         string datos;
-        datos = ($"Id: {IdCadete}\n Nombre: {NombreCadete}\nDireccion: {DireccionCadete}\nTelefono: {TelefonoCadete}");
+        datos = ($" Id: {IdCadete}\nNombre: {NombreCadete}\nDireccion: {DireccionCadete}\nTelefono: {TelefonoCadete}");
         return datos;
     }
 

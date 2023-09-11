@@ -51,5 +51,10 @@ public class Pedido
         }
         return false;
     }
+    public string DatosDelPedido(){
+        string? datos;
+        datos = $" Nro Pedido: {NroPedido.ToString()}\nEstado: {Estado.ToString()}\nCadete Asignado: {IdCadete}\nObservacion: {Observacion}\nDatos del Cliente {verDatosCliente()}Direccion del Cliente : {verDireccionCliente()} ";
+        return datos;
+    }
 }
 

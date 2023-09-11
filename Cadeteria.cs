@@ -115,15 +115,11 @@ public class Cadeteria{
         StringBuilder listadoDePedidos = new StringBuilder();
         foreach (var pedido in listadoPedido)
         {
-            listadoDePedidos.AppendLine(pedido.NroPedido.ToString());
-            listadoDePedidos.AppendLine(pedido.Estado.ToString());
-            listadoDePedidos.AppendLine(pedido.Observacion);
-            listadoDePedidos.AppendLine(pedido.verDatosCliente());
-            listadoDePedidos.AppendLine(pedido.verDireccionCliente());
+            listadoDePedidos.AppendLine(pedido.DatosDelPedido());
         }
         return listadoDePedidos.ToString();
     }
-    public string mostrarCadeteria(){
+    public string mostrarCadetes(){
         StringBuilder listadoDeCadetes = new StringBuilder();
         foreach (var cade in listadoCadetes)
         {

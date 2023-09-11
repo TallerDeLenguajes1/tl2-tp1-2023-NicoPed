@@ -16,7 +16,15 @@ namespace CadeteriaHrms;
                 Console.WriteLine("Nombre del Cadete: "+cadete.NombreCadete);
                 Console.WriteLine("Id del Cadete: "+cadete.IdCadete);
                 Console.WriteLine("Pedidos realizados: "+pedidosRealizadosCadete);
-                Console.WriteLine("Envios promedio del cadete del día de hoy : "+ pedidosRealizadosCadete * 100 / cantidadDePedidosDeHoy);
+                if (cantidadDePedidosDeHoy != 0)
+                {
+                    Console.WriteLine("Envios promedio del cadete del día de hoy : "+ pedidosRealizadosCadete * 100 / cantidadDePedidosDeHoy);
+                }
+                else
+                {
+                    Console.WriteLine("Envios promedio del cadete del día de hoy : 0");
+                }
+                    
                 Console.WriteLine("Total a cobrar: "+aCobrar);
                 Console.WriteLine("====================================");
             }
